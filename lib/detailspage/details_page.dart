@@ -1,4 +1,3 @@
-import 'package:cbo_task/edit/edit_page.dart';
 import 'package:cbo_task/homepage/controller/homepage_controller.dart';
 import 'package:cbo_task/homepage/model/model.dart';
 import 'package:cbo_task/homepage/view/homepage.dart';
@@ -17,12 +16,12 @@ class DetailsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Edit(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) =>
+              //   ),
+              // );
             },
             icon: const Icon(Icons.edit),
           )

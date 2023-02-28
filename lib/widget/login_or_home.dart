@@ -16,7 +16,7 @@ class LoginOrHomePage extends StatelessWidget {
         stream: value.authStateChanges,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const BottomBar();
+            return const HomePage();
           } else {
             return const LoginScreen();
           }

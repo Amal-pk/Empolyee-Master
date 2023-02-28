@@ -1,4 +1,5 @@
 import 'package:cbo_task/bottomnavigationbar/controller.dart';
+import 'package:cbo_task/edit/controller/edit_controller.dart';
 import 'package:cbo_task/homepage/controller/homepage_controller.dart';
 import 'package:cbo_task/login/controller/login_controller.dart';
 import 'package:cbo_task/widget/login_or_home.dart';
@@ -23,8 +24,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LoginController(),
-        ), ChangeNotifierProvider(
-          create: (context) => BottomController(),
+        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => BottomController(),
+        // ),
+        ChangeNotifierProvider(
+          create: (context) => EditController(),
         )
       ],
       child: MaterialApp(

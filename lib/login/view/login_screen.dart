@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                             : controller.createEmailAndPassword();
                       },
                       child: Text(
-                        controller.isLoading ? "Login" : "Rerister",
+                        controller.isLoading ? "Register" : "Login",
                       ),
                     ),
                   ],

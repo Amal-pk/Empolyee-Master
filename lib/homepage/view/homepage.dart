@@ -1,5 +1,4 @@
 import 'package:cbo_task/homepage/controller/homepage_controller.dart';
-import 'package:cbo_task/homepage/model/model.dart';
 import 'package:cbo_task/homepage/view/widgets/button.dart';
 import 'package:cbo_task/homepage/view/widgets/widget.dart';
 import 'package:flutter/material.dart';
@@ -30,25 +29,40 @@ class HomePage extends StatelessWidget {
                     textController: controller.empCode,
                     keyboard: TextInputType.number,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   MyRow(
                     rowname: 'Employee Name',
                     textController: controller.empName,
                     keyboard: TextInputType.name,
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   MyRow(
                     rowname: 'Address 1',
                     textController: controller.address,
                     keyboard: TextInputType.name,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   MyRow(
                     rowname: 'Mobile No.',
                     textController: controller.mobileNo,
                     keyboard: TextInputType.phone,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   MyRow(
                     rowname: 'Date of Birth',
                     textController: controller.dob,
                     keyboard: TextInputType.datetime,
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   MyRow(
                     rowname: 'Remarks',
