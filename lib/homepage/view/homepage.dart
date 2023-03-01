@@ -1,3 +1,4 @@
+import 'package:cbo_task/homepage/controller/animation_controller.dart';
 import 'package:cbo_task/homepage/controller/homepage_controller.dart';
 import 'package:cbo_task/homepage/view/widgets/button.dart';
 import 'package:cbo_task/homepage/view/widgets/widget.dart';
@@ -9,7 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final high = MediaQuery.of(context).size.height;
     final controller = Provider.of<HomePageController>(context);
+    final animationController = Provider.of<AnimateController>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -24,67 +27,139 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MyRow(
-                    rowname: 'Employee Code',
-                    textController: controller.empCode,
-                    keyboard: TextInputType.number,
+                  const Divider(
+                    thickness: 2,
+                    color: Colors.grey,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Consumer<AnimateController>(
+                            builder: (context, value, _) {
+                          return InkWell(
+                            onTap: () {
+                              animationController.isAdd();
+                            },
+                            child: Text(
+                              "Add",
+                              style: TextStyle(
+                                color: animationController.add
+                                    ? Colors.green
+                                    : Colors.grey,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }),
+                        InkWell(
+                          onTap: () {},
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: const Text(
+                            "Delete",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  MyRow(
-                    rowname: 'Employee Name',
-                    textController: controller.empName,
-                    keyboard: TextInputType.name,
+                  const Divider(
+                    thickness: 2,
+                    color: Colors.grey,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MyRow(
-                    rowname: 'Address 1',
-                    textController: controller.address,
-                    keyboard: TextInputType.name,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MyRow(
-                    rowname: 'Mobile No.',
-                    textController: controller.mobileNo,
-                    keyboard: TextInputType.phone,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MyRow(
-                    rowname: 'Date of Birth',
-                    textController: controller.dob,
-                    keyboard: TextInputType.datetime,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MyRow(
-                    rowname: 'Remarks',
-                    textController: controller.remark,
-                    keyboard: TextInputType.name,
-                  ),
-                  const SizedBox(
-                    height: 20,
+                  Consumer<AnimateController>(
+                    builder: (context, value, _) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 1500),
+                        height: animationController.add ? high / 1.42 : 0,
+                        alignment: animationController.add
+                            ? Alignment.centerRight
+                            : AlignmentDirectional.center,
+                        curve: Curves.fastOutSlowIn,
+                        child: animationController.add
+                            ? Column(
+                                children: [
+                                  MyRow(
+                                    rowname: 'Employee Code',
+                                    textController: controller.empCode,
+                                    keyboard: TextInputType.number,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  MyRow(
+                                    rowname: 'Employee Name',
+                                    textController: controller.empName,
+                                    keyboard: TextInputType.name,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  MyRow(
+                                    rowname: 'Address 1',
+                                    textController: controller.address,
+                                    keyboard: TextInputType.name,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  MyRow(
+                                    rowname: 'Mobile No.',
+                                    textController: controller.mobileNo,
+                                    keyboard: TextInputType.phone,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  MyRow(
+                                    rowname: 'Date of Birth',
+                                    textController: controller.dob,
+                                    keyboard: TextInputType.datetime,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  MyRow(
+                                    rowname: 'Remarks',
+                                    textController: controller.remark,
+                                    keyboard: TextInputType.name,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      if (controller.formKey.currentState!
+                                          .validate()) {
+                                        controller.createEmployee();
+                                        controller.cleartext();
+                                      }
+                                    },
+                                    child: const AddAndDeleteButton(
+                                      buttonName: "ADD",
+                                      clr: Colors.green,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
+                      );
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          controller.createEmployee();
-                          controller.cleartext();
-                        },
-                        child: const AddAndDeleteButton(
-                          buttonName: "ADD",
-                          clr: Colors.green,
-                        ),
-                      ),
                       // AddAndDeleteButton(buttonName: "", clr: clr)
                       InkWell(
                         onTap: () {
